@@ -1,0 +1,14 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-02-16"
+---
+
+```{r}
+# Load dataset
+DNA_Seq <- read.table("/home/dthanh/Downloads/rosalind_rna.txt")
+# Convert DNA sequencing to RNA sequencing 
+RNA_Seq <- gsub("T", "U", DNA_Seq$V1)
+RNA_Seq
+```
+

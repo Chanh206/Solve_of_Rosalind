@@ -1,0 +1,92 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-02-18"
+---
+
+```{r}
+# Method 1
+LongestSubstring <- function(string_list) {
+  longest <- ""
+  for (start_index in seq(nchar(string_list[[1]]))) {
+    for (end_index in nchar(string_list[[1]]):start_index) {
+      if (end_index - start_index <= nchar(longest)) {
+        break
+      } else if (CheckSubstring(substr(string_list[[1]], start_index, end_index), string_list)) {
+        longest <- substr(string_list[[1]], start_index, end_index)
+      }
+    }
+  }
+  return(longest)
+}
+
+CheckSubstring <- function(find_string, string_list) {
+  for (string in string_list) {
+    if (nchar(string) < nchar(find_string) || !(grepl(find_string, string))) {
+      return(FALSE)
+    }
+  }
+  return(TRUE)
+}
+
+fasta_list <- readLines("/home/dthanh/rosalind_lcsm.fasta")
+string_list <- fasta_list[grep(">", fasta_list, invert = TRUE)]
+# string_list <- sapply(fasta_list, function(x) strsplit(x, " ")[[1]][2])
+string_list
+lcsm <- LongestSubstring(string_list)
+lcsm
+```
+```{r}
+# Method 2 Optimize 
+LongestSubstring <- function(string_list) {
+  # Hàm kiểm tra xem chuỗi có tồn tại trong tất cả các chuỗi khác không
+  CheckSubstring <- function(substring, string_list) {
+    for (string in string_list) {
+      if (!grepl(substring, string)) {
+        return(FALSE)
+      }
+    }
+    return(TRUE)
+  }
+  
+  # Tìm độ dài lớn nhất của chuỗi chung
+  max_length <- min(nchar(string_list))
+  longest <- ""
+  
+  # Tìm kiếm nhị phân để xác định độ dài của chuỗi chung
+  low <- 1
+  high <- max_length
+  while (low <= high) {
+    mid <- low + floor((high - low) / 2)
+    found <- FALSE
+    
+    # Kiểm tra tất cả các chuỗi con có độ dài là mid
+    for (start_index in 1:(nchar(string_list[[1]]) - mid + 1)) {
+      substring <- substr(string_list[[1]], start_index, start_index + mid - 1)
+      if (CheckSubstring(substring, string_list)) {
+        found <- TRUE
+        longest <- substring
+        break
+      }
+    }
+    
+    # Nếu tìm thấy chuỗi chung, thì tăng độ dài lên 1
+    if (found) {
+      low <- mid + 1
+    } else {
+      high <- mid - 1
+    }
+  }
+  
+  return(longest)
+}
+
+# Đọc dữ liệu từ file và loại bỏ các dòng bắt đầu bằng ">"
+fasta_list <- readLines("/home/dthanh/rosalind_lcsm.fasta")
+string_list <- fasta_list[grep(">", fasta_list, invert = TRUE)]
+
+# Gọi hàm LongestSubstring và in ra kết quả
+lcsm <- LongestSubstring(string_list)
+print(lcsm)
+```
+

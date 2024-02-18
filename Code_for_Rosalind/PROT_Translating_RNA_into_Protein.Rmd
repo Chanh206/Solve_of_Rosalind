@@ -1,0 +1,24 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-02-16"
+---
+
+```{r}
+# Load dataset
+library("Biostrings")
+data <- read.table("/home/dthanh/Downloads/rosalind_prot.txt")
+seq <- RNAString(data$V1)
+## Translating RNA to Protein
+translated_seq <- translate(seq, genetic.code = GENETIC_CODE, no.init.codon = FALSE, if.fuzzy.codon = "error")
+## Extracting codons without translating them
+codons(seq)
+
+# Extracting the entire sequence explicitly and printing it
+print(as.character(translated_seq))
+
+
+
+
+```
+

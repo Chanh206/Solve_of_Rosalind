@@ -1,0 +1,18 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-02-16"
+---
+
+```{r}
+library(dplyr)
+
+alphabet <- c("A", "B", "C", "D", "E", "F", "G", "H", "I")
+n <- 3  # Replace with your desired length
+
+combinations <- expand.grid(rep(list(alphabet), n))  # Generate all combinations of length n
+sort_combinations <- combinations %>% arrange_all()  # Sort the combinations lexicographically
+write.csv(sort_combinations, "/home/dthanh/Downloads/sort.csv")
+
+```
+

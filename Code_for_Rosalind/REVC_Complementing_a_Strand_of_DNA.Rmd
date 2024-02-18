@@ -1,0 +1,22 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-02-16"
+---
+
+```{r}
+# Load dataset
+string <- read.table("/home/dthanh/Downloads/rosalind_revc.txt")
+# Splits the input string into individual characters
+split_seq <- strsplit(string$V1, "")
+# Reversing sequen start from characters 1
+revers_seq <- rev(split_seq[[1]])
+# Concatenate characters to sequen 
+concaternate_seq <- paste(revers_seq, collapse = "")
+concaternate_seq
+# chartr() function to replace the characters according to the specified mapping
+specified_mapping <- c("A"="T", "C"="G", "T"="A", "G"="C")
+transformed_seq <- chartr(paste(names(specified_mapping), collapse=""),paste(specified_mapping, collapse=""), concaternate_seq)
+transformed_seq
+```
+

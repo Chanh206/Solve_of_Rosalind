@@ -1,0 +1,26 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-02-16"
+---
+
+```{r}
+library(gtools)
+
+# Set the positive integer n
+n <- 5  # Replace with the desired value <= 7
+
+# Generate all permutations of length n
+permutations <- permutations(n, n)
+
+# Count the total number of permutations
+total <- nrow(permutations)
+
+# Display the total number of permutations
+print(total)
+
+# Display the list of permutations
+a <- print(permutations)
+write.csv(a,"/home/dthanh/Downloads/a.csv")
+```
+

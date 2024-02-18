@@ -1,0 +1,50 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-02-17"
+---
+
+```{r}
+# E(X) is long-term average of a random variable over a large number of trials
+# If X is a uniform random variable with minimum possible value a and maximum possible value b, then E(X)= (a+b)/2
+
+# Number of couples
+AA_AA = 19722
+AA_Aa = 19857
+AA_aa = 17615
+Aa_Aa = 17867
+Aa_aa = 17749
+aa_aa = 16874
+```
+
+```{r}
+# Function for the expected number of offspring
+expected <- function(prob, x) {
+  if (x == 0) {
+    return(0)
+  } else {
+    return(prob * (x*2))
+  }
+}
+# Probability for AA * AA (100%)
+total_AAAA <- expected(1, AA_AA)
+
+# Probability for AA * Aa (100%)
+total_AAAa <- expected(1, AA_Aa)
+
+# Probability for AA * aa (100%)
+total_AAaa <- expected(1, AA_aa)
+
+# Probability for Aa * Aa (75%)
+total_AaAa <- expected(0.75, Aa_Aa)
+
+# Probability for Aa * aa (50%)
+total_Aaaa <- expected(0.5, Aa_aa)
+
+# Probability for aa * aa (0%)
+total_aaaa <- expected(0, aa_aa)
+
+# Probability for dominant phenotype in the next generation
+total_AAAA + total_AAAa + total_AAaa + total_AaAa + total_Aaaa + total_aaaa
+```
+

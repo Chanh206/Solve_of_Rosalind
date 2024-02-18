@@ -1,0 +1,50 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-02-18"
+---
+
+
+```{r}
+# Read the DNA strings in FASTA format
+read_fasta <- function(file_path) {
+  fasta_data <- readLines(file_path)
+  seq_names <- gsub(">", "", fasta_data[grep(">", fasta_data)])
+  sequences <- sapply(seq_names, function(name) {
+    index <- which(fasta_data == paste0(">", name))
+    paste(fasta_data[(index + 1):(index + 1)], collapse = "")
+  })
+  return(list(names = seq_names, sequences = sequences))
+}
+
+# Function to find overlaps of length k
+find_overlaps <- function(strings, k = 3) {
+  overlaps <- list()
+  for (i in 1:length(strings$sequences)) {
+    for (j in 1:length(strings$sequences)) {
+      if (i != j) {
+        suffix <- substr(strings$sequences[[i]], nchar(strings$sequences[[i]]) - k + 1, nchar(strings$sequences[[i]]))
+        prefix <- substr(strings$sequences[[j]], 1, k)
+        if (suffix == prefix) {
+          overlaps[[paste(strings$names[i], strings$names[j], sep = ' ')]] <- c(strings$names[i], strings$names[j])  # Storing sample IDs
+        }
+      }
+    }
+  }
+  return(overlaps)
+}
+
+# Read DNA strings from file
+dna_data <- read_fasta("/home/dthanh/rosalind_grph.fasta")
+
+# Find overlaps of length 3
+overlap_graph <- find_overlaps(dna_data, k = 3)
+
+# Print adjacency list with sample IDs without double quotes
+for (edge in overlap_graph) {
+  print(edge)
+}
+
+# Use software to read result 
+```
+

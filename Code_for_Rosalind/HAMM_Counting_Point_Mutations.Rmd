@@ -1,0 +1,24 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-02-16"
+---
+
+```{r}
+# Define the sequences
+data <- read.table("/home/dthanh/Downloads/rosalind_hamm.txt")
+seq1 <- data[1,]
+seq2 <- data[2,]
+
+# Initialize a counter for differences
+Point_Mutation <- 0
+# Loop through each character of the sequences and count differences
+for (i in 1:nchar(seq1)) { # Return number of character in sequence
+  if (substr(seq1, i, i) != substr(seq2, i, i)) {
+    Point_Mutation <- Point_Mutation + 1
+  }
+}
+# Display the count of differences
+print(paste("Number of differences:", Point_Mutation))
+```
+

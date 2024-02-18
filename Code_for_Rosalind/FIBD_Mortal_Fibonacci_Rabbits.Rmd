@@ -1,0 +1,54 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-02-17"
+---
+
+```{r}
+# Define a function that takes n and m as arguments
+fib_rabbits <- function(n, m) {
+  # Initialize a vector to store the number of pairs of rabbits for each month
+  rabbits <- numeric(n)
+  # The first and second months have one pair each
+  rabbits[1:2] <- 1
+  # Loop through the remaining months
+  for (i in 3:n) {
+    # If the current month is less than or equal to the lifespan of the rabbits
+    if (i < m) {
+      # The number of pairs is the sum of the previous two months
+      rabbits[i] <- 1
+    } else if (i==m) {
+      rabbits[i] <- rabbits[i-1] + rabbits[i-2]
+    } else {
+      # The number of pairs is the sum of the previous two months minus the pairs that die
+      rabbits[i] <- rabbits[i-1] + rabbits[i-2] - rabbits[i-m]
+    }
+  }
+  # Return the number of pairs in the last month
+  return(rabbits[n])
+}
+
+# Test the function with some examples
+fib_rabbits(6, 3) # 4
+fib_rabbits(7, 4) # 9
+fib_rabbits(84, 18) # 35
+format (fib_rabbits (84, 18), big.mark = "", scientific = FALSE)
+
+```
+```{r}
+fib_rabbits <- function(n, m) {
+  rabbits <- numeric(n)
+  rabbits[1:m] <- 1  # Populate the initial rabbits for the first m months
+  for (i in (m + 1):n) {
+    rabbits[i] <- sum(rabbits[(i - m):(i - 1)]) - rabbits[i - m + 1]  # Calculate the new rabbits based on the last m months
+  }
+  return(rabbits[n])
+}
+
+# Test the function with some examples
+fib_rabbits(6, 3) # 4
+format (fib_rabbits (18, 9), big.mark = "", scientific = FALSE)
+```
+
+
+

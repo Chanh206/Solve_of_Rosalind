@@ -1,0 +1,37 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-02-17"
+---
+
+```{r}
+# Total of number for AA
+AA <- 2
+# Total of number for Aa
+Aa <- 2
+# Total of number for aa
+aa <- 2
+
+# Total of numer in population
+Total_orgs <- AA + Aa + aa
+
+# Create function for combination of ways to select 2 individuals
+calculate_total_ways <- function(x) {
+  return((x*(x - 1) / 2)) # Assume that any two organisms can mate ( Ex: Only one situation Aa x Aa instead of two situation)
+}
+total_ways <- calculate_total_ways(Total_orgs)
+
+# Probability for aa in situation of aa x aa (100%)
+ways_of_aaaa <- (calculate_total_ways(aa) * (1)) / total_ways
+
+# Probability for aa in situation of Aa x aa (50%)
+ways_of_Aaaa <- (Aa * aa * (0.5)) / total_ways
+
+# Probability for aa in situation of Aa x aa (25%)
+ways_of_AaAa <- (calculate_total_ways(Aa) * (0.25)) / total_ways
+
+# Probability for AA and Aa
+result <- 1 - (ways_of_aaaa + ways_of_Aaaa + ways_of_AaAa)
+round(result,5) 
+```
+

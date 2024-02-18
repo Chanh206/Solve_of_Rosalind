@@ -1,0 +1,40 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-02-16"
+---
+
+```{r}
+# Load dataset
+string1 <- read.table("/home/dthanh/Downloads/rosalind_dna.txt")
+# string1 <- "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC"
+count_A <- 0
+count_C <- 0
+count_G <- 0
+count_T <- 0
+# Iterate through the string and count occurrences
+for (nucleotide in strsplit(string1$V1, "")[[1]]) {
+  if (nucleotide == "A") {
+    count_A <- count_A + 1
+  } else if (nucleotide == "C") {
+    count_C <- count_C + 1
+  } else if (nucleotide == "G") {
+    count_G <- count_G + 1
+  } else if (nucleotide == "T") {
+    count_T <- count_T + 1
+  }
+}
+```
+
+```{r}
+  if (x == A) {
+      count_A = count_A + 1
+    } else if (x == C) {
+      count_C = count_C + 1
+    } else if (x == G) {
+      count_G = count_G + 1
+    } else (x == T) {
+      count_T = count_T + 1
+  }
+```
+

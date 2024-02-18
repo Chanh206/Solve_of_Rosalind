@@ -1,0 +1,27 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-02-17"
+---
+
+```{r}
+# Function to calculate partial permutations modulo 1000000
+partial_permutations <- function(n, k) {
+  result <- 1
+  for (i in 0:(k - 1)) {
+    result <- (result * (n - i)) %% 1000000
+  }
+  return(result)
+}
+
+# Calculate
+n <- 81  # Replace with your desired value of n
+k <- 9   # Replace with your desired value of k
+result <- partial_permutations(n, k)
+cat("P(", n, ",", k, ") =", result, " (modulo 1000000)\n")
+
+```
+```{r}
+
+```
+

@@ -1,0 +1,38 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-02-18"
+---
+
+```{r}
+lexicographically_ordered_strings <- function(alphabet) {
+  ordered_strings <- c()
+# Replace for n  
+  for (char1 in alphabet) {
+    ordered_strings <- c(ordered_strings, char1)
+    for (char2 in alphabet) {
+      ordered_strings <- c(ordered_strings, paste(char1, char2, sep = ""))
+      for (char3 in alphabet) {
+        ordered_strings <- c(ordered_strings, paste(char1, char2, char3, sep = ""))
+        for (char4 in alphabet) {
+          ordered_strings <- c(ordered_strings, paste(char1, char2, char3, char4, sep = ""))
+        }
+      }
+    }
+  }
+  
+  return(ordered_strings)
+}
+
+# Sample dataset
+alphabet <- c("S","A","M","H","E","L","R","Y","O","C")
+
+# Output
+result <- lexicographically_ordered_strings(alphabet)
+for (string in result) {
+  cat(string, "\n")
+}
+
+
+```
+

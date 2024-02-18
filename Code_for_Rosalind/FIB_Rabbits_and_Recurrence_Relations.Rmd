@@ -1,0 +1,25 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-02-16"
+---
+
+```{r}
+# New Knowledge: https://rosalind.info/glossary/fibonacci-sequence/
+total_rabbits <- function(n,k) {
+  # Total number of rabbit pairs after n mounth
+  rabbits <- numeric(n)
+  # With total number of rabbit pairs F1=F2=1 to initiate the sequence (n=1 and n=2)
+  rabbits[1:2] <- 1
+  for (i in 3:n) {
+    rabbits[i] <- rabbits[i - 1] + rabbits[i - 2] * k # Because we begin with 1 pair and in each generation (reproduction-age rabbits)
+  }
+  return(rabbits[i])
+}
+```
+
+```{r}
+data <- read.table("/home/dthanh/Downloads/rosalind_fib.txt")
+total_rabbits(data$V1,data$V2)
+```
+
